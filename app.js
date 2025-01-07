@@ -2,6 +2,7 @@ const fetchCountry = async () => {
     try {
         const reponse = await fetch('https://restcountries.com/v3.1/region/europe')
         const country = await reponse.json()
+        console.log(country)
         // Afficher le nom de chaque user dans la page html
         const countryList = document.querySelector('#list-pays')
         // Afficher le nom de chaque utilisateur dans un <p>
@@ -25,19 +26,24 @@ data-superficie="${country.area}"
     } catch (erreur) {
         console.log(erreur)
     }
+
+    const countriesList = document.querySelector('#list-pays')
+    countriesList.addEventListener("click",(e) => {
+        const target = e.target.closest(".card")
+
+        const img = document.querySelector('#img-detail')
+        const imgCountry = target.dataset.image
+        img.src=imgCountry
+        const titre = document.querySelector('#titre-detail')
+        const titreCountry = target.dataset.nom
+        titre.textContent=titreCountry
+        const capital = document.querySelector('#capital-detail')
+        const capitalCountry = target.dataset.capital
+        capital.textContent=capitalCountry
+
+    })
+
 }
 fetchCountry()
 
 
-const countriesList = document.querySelector('#list-pays')
-countriesList.addEventListener("click",(e) => {
-    const target = e.target.closest(".card")
-
-    const img = document.querySelector('#img-detail')
-    const imgCountry = target.dataset.image
-    img.src=imgCountry
-    const titre = document.querySelector('#titre-detail')
-    const titreCountry = target.dataset.nom
-    titre.textContent=titreCountry
-x
-})
